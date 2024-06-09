@@ -1,5 +1,5 @@
 import img from "@/assets/WhatsApp Image 2024-01-19 at 13.04.25.jpeg";
-import Animacao from "@/components/animacao";
+import Animacao from "@/components/Animacao";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -59,7 +59,7 @@ export default function Home() {
               </div>
             ))}
             <Link
-              href={"/"}
+              href={"/TabelaEquipes"}
               className="text-sm text-zinc-200/50 underline mt-5"
             >
               ver tabela
@@ -113,7 +113,7 @@ export default function Home() {
               </div>
             ))}
             <Link
-              href={"/"}
+              href={"/TabelaEquipes"}
               className="text-sm text-zinc-200/50 underline mt-5"
             >
               ver tabela
