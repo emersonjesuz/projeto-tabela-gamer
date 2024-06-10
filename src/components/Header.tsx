@@ -4,6 +4,7 @@ import { CiMenuFries } from "react-icons/ci";
 import SheetsShadcn from "./SheetShadcn";
 import Link from "next/link";
 import { IoMdSettings } from "react-icons/io";
+import { IoHomeSharp } from "react-icons/io5";
 
 export default function Header() {
   function corpoMenu() {
@@ -13,13 +14,19 @@ export default function Header() {
           href={"/"}
           className="flex items-center w-full h-12 border-l-2 border-l-dourado text-dourado uppercase pl-5"
         >
-          <span className="font-roboto">Tabela EQUIPES</span>
+          <span className="font-roboto">Inicio</span>
+        </Link>
+        <Link
+          href={"/TabelaEquipes"}
+          className="flex items-center w-full h-12 border-l-2 border-l-dourado text-dourado uppercase pl-5"
+        >
+          <span className="font-roboto">EQUIPES</span>
         </Link>
         <Link
           href={"/"}
           className="flex items-center w-full h-12 border-l-2 border-l-dourado text-dourado uppercase pl-5"
         >
-          <span className="font-roboto">Tabela MVP</span>
+          <span className="font-roboto">MVP</span>
         </Link>
         <Link
           href={"/"}
@@ -35,18 +42,41 @@ export default function Header() {
   return (
     <div className="flex items-center justify-center w-full h-[100px] bg-pretoCarvao">
       <div className="flex items-center justify-between w-[80%] h-full">
-        <div className="flex items-center w-[100px] h-full py-1">
+        <div className="flex items-center  h-full pt-5">
           <Image
             className="h-full w-full object-contain"
             src={logoImg}
             alt=""
           />
         </div>
-        <div className="flex items-center justify-end w-[100px] h-full">
+        <div className="lg:hidden flex items-center justify-end w-[100px] h-full">
           <SheetsShadcn
             botao={<CiMenuFries className="h-8 w-8 fill-dourado " />}
             corpo={corpoMenu()}
           />
+        </div>
+        <div className="lg:flex hidden items-center justify-end gap-5 w-[50%]">
+          <Link
+            href={"/TabelaEquipes"}
+            className="flex items-end  text-dourado uppercase "
+          >
+            <span className="font-roboto">EQUIPES</span>
+          </Link>
+          <Link
+            href={"/"}
+            className="flex items-center    text-dourado uppercase "
+          >
+            <span className="font-roboto">MVP</span>
+          </Link>
+          <Link href={"/"} className="flex items-center   ml-10">
+            <IoHomeSharp className="fill-dourado w-8 h-8" />
+          </Link>
+          <Link
+            href={"/"}
+            className="flex items-center   gap-2  text-cinzaAzulado uppercase "
+          >
+            <IoMdSettings className="w-8 h-8" />
+          </Link>
         </div>
       </div>
     </div>
