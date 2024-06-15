@@ -9,7 +9,7 @@ interface Props {
 
 export default function Top3Equipes({ equipes, link, titulo }: Props) {
   return (
-    <div className="flex flex-col items-center lg:justify-between lg:py-10 p-5 gap-3 w-full shadow-md shadow-black/50  bg-pretoCarvao rounded-lg lg:rounded-2xl">
+    <div className="flex flex-col items-center lg:justify-between lg:py-10 p-5 gap-3 w-full  lg:h-[500px] bg-[#3f3f3f] shadow-md shadow-black/50   rounded-lg lg:rounded-2xl">
       <div className="flex  justify-center  w-full h-10 my-5">
         <h1 className="font-bold  font-roboto text-center capitalize text-white text-[20px] lg:text-[30px] w-full">
           {titulo}

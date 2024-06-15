@@ -42,7 +42,7 @@ export default function Header() {
   return (
     <div className="flex items-center justify-center w-full h-[100px] bg-pretoCarvao">
       <div className="flex items-center justify-between w-[80%] h-full">
-        <div className="flex items-center  h-full pt-5">
+        <div className="flex items-center  h-full p-2">
           <Image
             className="h-full w-full object-contain"
             src={logoImg}
@@ -63,12 +63,12 @@ export default function Header() {
             <span className="font-roboto">EQUIPES</span>
           </Link>
           <Link
-            href={"/"}
+            href={"/TabelaEquipes"}
             className="flex items-center    text-dourado uppercase "
           >
             <span className="font-roboto">MVP</span>
           </Link>
-          <Link href={"/"} className="flex items-center   ml-10">
+          <Link href={"/TabelaEquipes"} className="flex items-center   ml-10">
             <IoHomeSharp className="fill-dourado w-8 h-8" />
           </Link>
           <Link
