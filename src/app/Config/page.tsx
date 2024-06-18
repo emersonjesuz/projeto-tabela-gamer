@@ -1,24 +1,84 @@
+"use client";
+
+import { LidarComEquipe } from "@/components/LidarComEquipe";
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { CiSquareRemove } from "react-icons/ci";
+import { FaEdit } from "react-icons/fa";
+import { MdOutlineControlPoint } from "react-icons/md";
+
+interface Squads {
+  id: string;
+  equipe: string;
+  booyar: number;
+  pontos: number;
+  kills: number;
+  bermuda: number;
+  purgatorio: number;
+  kalahari: number;
+  logo: string;
+  Players: Players[];
+}
+
+interface Players {
+  id: string;
+  nome: string;
+  squard: Squads;
+  squard_id: string;
+  bermuda: number;
+  purgatorio: number;
+  kalahari: number;
+  abates: number;
+  logo: string;
+}
 
 export default function Config() {
+  const [equipes, setEquipes] = useState<Squads[]>([]);
+
+  useEffect(() => {
+    fetch("/api/listaDeEquipes", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setEquipes(data);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  }, []);
   return (
-    <div className="flex flex-col items-center  bg-[#f3f3f3] w-full h-full min-h-[80vh]">
-      <div className="w-[80%] py-10">
-        <div className="flex justify-end gap-5 mb-10 ">
-          <button className="h-12 w-[200px] bg-azulProdundo text-white rounded-sm hover:opacity-80">
-            Nova Equipe
-          </button>
+    <div className=" flex flex-col items-center  bg-[#f3f3f3] w-full h-full min-h-[80vh] relative">
+      <div className="w-[95%] max-w-[700px] py-10">
+        <div className="flex justify-center gap-5 mb-10 ">
+          <LidarComEquipe
+            tipo="novaEquipe"
+            buttonClassName="w-[150px] h-[50px]"
+          >
+            <p className="flex items-center  justify-center h-full w-full bg-azulProdundo text-white rounded-sm hover:opacity-80">
+              Nova Equipe
+            </p>
+          </LidarComEquipe>
         </div>
         <div className="flex flex-col gap-2 bg-white p-2 rounded-sm">
-          {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item) => (
-            <div className="flex items-center justify-between gap-10 w-full h-12 bg-cinzaClaro rounded-sm mt-5 px-2">
+          {equipes.map((item) => (
+            <div
+              key={item.id}
+              className="flex items-center justify-between gap-10 w-full h-[100px] bg-cinzaClaro rounded-sm mt-5 px-2 shadow-md shadow-black/45"
+            >
               <div className="flex justify-between">
-                <div className="flex items-center gap-5">
-                  <div className="w-10 h-10 ">
+                <div className="flex items-center  gap-5">
+                  <div className="w-12 h-full ">
                     <Image
                       className="w-full h-full object-contain rounded-md"
                       src={
-                        "https://i.ibb.co/kJbxDT4/Whats-App-Image-2024-01-19-at-13-04-25.jpg"
+                        !item.logo
+                          ? "https://i.ibb.co/kJbxDT4/Whats-App-Image-2024-01-19-at-13-04-25.jpg"
+                          : item.logo
                       }
                       width={1000}
                       height={1000}
@@ -26,21 +86,22 @@ export default function Config() {
                     />
                   </div>
                   <span className="text-[10px] lg:text-[16px] max-w-[80px] lg:max-w-[200px]">
-                    os cagaceiros do certão
+                    {item.equipe}
                   </span>
-                </div>
-                <div className="flex items-center lg:gap-12 gap-10 ">
-                  <span className="text-[10px] lg:text-[16px]">100</span>
-                  <span className="text-[10px] lg:text-[16px]">100</span>
-                  <span className="text-[10px] lg:text-[16px]">1000</span>
                 </div>
               </div>
               <div className="flex gap-5">
-                <button className="h-12 w-[200px] bg-azulProdundo text-white rounded-sm hover:opacity-80">
-                  Editar Equipe
+                <Link
+                  href={`/EditarEquipe/${item.id}`}
+                  className="py-2 text-[26px] text-cinzaAzulado rounded-sm hover:opacity-80"
+                >
+                  <FaEdit />
+                </Link>
+                <button className="py-2   text-[26px] text-cinzaAzulado rounded-sm hover:opacity-80">
+                  <MdOutlineControlPoint />
                 </button>
-                <button className="h-12 w-[200px] bg-azulProdundo text-white rounded-sm hover:opacity-80">
-                  Adicionar Pontos
+                <button className="py-2   text-[26px] text-vermelhoVibrante te rounded-sm hover:opacity-80">
+                  <CiSquareRemove />
                 </button>
               </div>
             </div>

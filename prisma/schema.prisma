@@ -23,6 +23,7 @@ model Squards {
   bermuda    Int    @default(0)
   purgatorio Int    @default(0)
   kalahari   Int    @default(0)
+  logo       String
 
   Players Players[]
 }
@@ -36,4 +37,5 @@ model Players {
   purgatorio Int     @default(0)
   kalahari   Int     @default(0)
   abates     Int     @default(0)
+  logo       String
 }
