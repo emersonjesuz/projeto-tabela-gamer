@@ -48,6 +48,7 @@ export default function Config() {
         setEquipes(data);
       })
       .catch((error) => {
+        console.log(error);
         alert(error.message);
       });
   }, []);

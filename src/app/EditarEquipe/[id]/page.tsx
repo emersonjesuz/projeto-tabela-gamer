@@ -1,8 +1,12 @@
 "use client";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import NovaEquipe from "../../../components/Equipe";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
+import { useParams, useRouter } from "next/navigation";
 
 interface Squads {
   id: string;
@@ -20,7 +24,7 @@ interface Squads {
 interface Players {
   id: string;
   nome: string;
-  squard: Squads;
+
   squard_id: string;
   bermuda: number;
   purgatorio: number;
@@ -31,6 +35,7 @@ interface Players {
 
 export default function EditarEquipe() {
   const id = useParams().id;
+  const router = useRouter();
   const [form, setForm] = useState<Squads>({
     bermuda: 0,
     purgatorio: 0,
@@ -43,6 +48,37 @@ export default function EditarEquipe() {
     logo: "",
     Players: [],
   });
+
+  async function submit(e: FormEvent) {
+    e.preventDefault();
+    try {
+      fetch("/api/editarEquipe", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+      router.push("/Config");
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  function preechendoJogadores(jogador: Players) {
+    const buscarJogadorIndex = form.Players.findIndex(
+      (player) => player.id === jogador.id
+    );
+    console.log(buscarJogadorIndex);
+
+    if (buscarJogadorIndex !== -1) {
+      const novoDados = form;
+      novoDados.Players.splice(buscarJogadorIndex, 1, jogador);
+      console.log(novoDados.Players);
+
+      setForm({ ...novoDados });
+    }
+  }
 
   useEffect(() => {
     fetch("/api/buscarEquipe/" + id, {
@@ -63,8 +99,11 @@ export default function EditarEquipe() {
   return (
     <div className="w-full  flex items-center justify-center bg-black/30">
       <div className="w-full h-full flex items-center justify-center p-2 bg-white">
-        <form className="flex items-center justify-center w-full lg:w-[50%] flex-col  gap-2 py-4">
-          <div className="flex gap-2 flex-col items-center  bg-cinzaClaro w-full p-2 rounded-md mb-5">
+        <form
+          onSubmit={submit}
+          className="flex items-center justify-center w-full lg:w-[50%] flex-col  gap-2 py-4"
+        >
+          <div className="flex gap-2 flex-col items-center  bg-cinzaClaro w-full p-2 rounded-md mb-5 shadow-lg shadow-black/35">
             <div className="w-full ">
               <label htmlFor="">Nome da Equipe</label>
               <input
@@ -167,7 +206,10 @@ export default function EditarEquipe() {
             </div>
           </div>
           {form.Players.map((item, index) => (
-            <div className="flex flex-col w-full  gap-2 bg-zinc-400 mb-5 p-2">
+            <div
+              key={index}
+              className="flex flex-col w-full  gap-2 bg-zinc-400 mb-5 p-2 rounded-lg shadow-lg shadow-black/45"
+            >
               <h1 className="text-xl text-white font-bold">
                 Jogador {index + 1}
               </h1>
@@ -177,13 +219,7 @@ export default function EditarEquipe() {
                   name="player1"
                   value={item.nome}
                   onChange={(event) =>
-                    setForm({
-                      ...form,
-                      Players: [
-                        ...form.Players,
-                        { ...form.Players[index], nome: event.target.value },
-                      ],
-                    })
+                    preechendoJogadores({ ...item, nome: event.target.value })
                   }
                   type="text"
                   className="px-2 w-full h-8 border-2  rounded-md"
@@ -195,16 +231,7 @@ export default function EditarEquipe() {
                   name="logoPlaquer1"
                   value={item.logo}
                   onChange={(event) =>
-                    setForm({
-                      ...form,
-                      Players: [
-                        ...form.Players,
-                        {
-                          ...form.Players[index],
-                          logo: event.target.value,
-                        },
-                      ],
-                    })
+                    preechendoJogadores({ ...item, logo: event.target.value })
                   }
                   className="px-2 w-full h-8 border-2  rounded-md"
                 />
@@ -215,15 +242,9 @@ export default function EditarEquipe() {
                   name="logoPlaquer1"
                   value={item.abates}
                   onChange={(event) =>
-                    setForm({
-                      ...form,
-                      Players: [
-                        ...form.Players,
-                        {
-                          ...form.Players[index],
-                          abates: +event.target.value,
-                        },
-                      ],
+                    preechendoJogadores({
+                      ...item,
+                      abates: +event.target.value,
                     })
                   }
                   type="number"
@@ -238,15 +259,9 @@ export default function EditarEquipe() {
                     name="logo"
                     value={item.bermuda}
                     onChange={(event) =>
-                      setForm({
-                        ...form,
-                        Players: [
-                          ...form.Players,
-                          {
-                            ...form.Players[index],
-                            bermuda: +event.target.value,
-                          },
-                        ],
+                      preechendoJogadores({
+                        ...item,
+                        bermuda: +event.target.value,
                       })
                     }
                     type="number"
@@ -259,15 +274,9 @@ export default function EditarEquipe() {
                     name="logo"
                     value={item.kalahari}
                     onChange={(event) =>
-                      setForm({
-                        ...form,
-                        Players: [
-                          ...form.Players,
-                          {
-                            ...form.Players[index],
-                            kalahari: +event.target.value,
-                          },
-                        ],
+                      preechendoJogadores({
+                        ...item,
+                        kalahari: +event.target.value,
                       })
                     }
                     type="number"
@@ -280,15 +289,9 @@ export default function EditarEquipe() {
                     name="logo"
                     value={item.purgatorio}
                     onChange={(event) =>
-                      setForm({
-                        ...form,
-                        Players: [
-                          ...form.Players,
-                          {
-                            ...form.Players[index],
-                            purgatorio: +event.target.value,
-                          },
-                        ],
+                      preechendoJogadores({
+                        ...item,
+                        purgatorio: +event.target.value,
                       })
                     }
                     type="number"
@@ -300,11 +303,39 @@ export default function EditarEquipe() {
           ))}
 
           <button
+            className="h-12 w-[200px] bg-cinzaAzulado  text-white rounded-md"
+            type="button"
+            onClick={() =>
+              setForm({
+                ...form,
+                Players: [
+                  ...form.Players,
+                  {
+                    nome: "",
+                    logo: "",
+                    abates: 0,
+                    bermuda: 0,
+                    kalahari: 0,
+                    purgatorio: 0,
+                    id: "novo",
+                    squard_id: form.id,
+                  },
+                ],
+              })
+            }
+          >
+            Novo Jogador
+          </button>
+          <button
             className="h-12 w-[200px] bg-azulEscuroCarvao  text-white rounded-md"
             type="submit"
           >
             Salvar
           </button>
+
+          <p className="text-zinc-500 text-center">
+            Para excluir um jogador, basta deixar seu nome em branco:
+          </p>
         </form>
       </div>
     </div>
