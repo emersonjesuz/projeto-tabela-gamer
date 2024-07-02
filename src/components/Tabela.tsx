@@ -10,7 +10,7 @@ export default function Tabela({
   return (
     <div className="flex flex-col items-center w-full pb-10">
       <div className="w-[95%] lg:w-[80%] bg-white  rounded-lg shadow-lg shadow-black/50">
-        <div className="flex items-center justify-between gap-2  w-full h-12 px-5 bg-slate-500 rounded-t-lg">
+        <div className="flex items-center justify-between gap-2  w-full h-12 px-5 bg-black rounded-t-lg">
           {tipo === "equipe" ? (
             <>
               <div className="flex items-center gap-2">
@@ -19,7 +19,7 @@ export default function Tabela({
                   EQUIPE
                 </span>
               </div>
-              <div className="flex items-center gap-12 lg:pr-5">
+              <div className="flex items-center gap-12 lg:pr-5 text-[#f2f2f2]">
                 <span className="text-[16px]">A</span>
                 <span className="text-[16px]">B</span>
                 <span className="text-[16px]">P</span>
@@ -27,13 +27,13 @@ export default function Tabela({
             </>
           ) : (
             <>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 text-[#f2f2f2]">
                 <span className="w-5"></span>
-                <span className="w-[120px] text-[16px] lg:text-[20px] text-cinzaClaro">
+                <span className="w-[120px] text-[16px] lg:text-[20px]">
                   Jogador
                 </span>
               </div>
-              <span className="text-[16px]">A</span>
+              <span className="text-[16px] text-[#f2f2f2]">A</span>
             </>
           )}
         </div>
@@ -110,7 +110,7 @@ export default function Tabela({
                 <span className="text-[10px] lg:text-[16px]">1000</span>
               </div>
             ))}
-        <div className="flex items-center justify-between gap-2  w-full h-5 px-5 bg-slate-500 rounded-b-lg"></div>
+        <div className="flex items-center justify-between gap-2  w-full h-12 px-5 bg-black rounded-b-lg"></div>
       </div>
     </div>
   );

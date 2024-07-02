@@ -1,4 +1,4 @@
-import logoImg from "@/assets/WhatsApp_Image_2024-01-19_at_13.04.25-removebg-preview.png";
+import logoImg from "@/assets/luxa.org-color-changed-WhatsApp_Image_2024-01-19_at_13.04.25-removebg-preview (1).png";
 import Image from "next/image";
 import { CiMenuFries } from "react-icons/ci";
 import SheetsShadcn from "./SheetShadcn";
@@ -40,9 +40,9 @@ export default function Header() {
   }
 
   return (
-    <div className="flex items-center justify-center w-full h-[100px] bg-pretoCarvao">
+    <div className="flex items-center justify-center w-full h-[100px] bg-[#f2f2f2]">
       <div className="flex items-center justify-between w-[80%] h-full">
-        <div className="flex items-center  h-full p-2">
+        <div className="flex items-center  h-full pt-5">
           <Image
             className="h-full w-full object-contain"
             src={logoImg}
@@ -51,29 +51,29 @@ export default function Header() {
         </div>
         <div className="lg:hidden flex items-center justify-end w-[100px] h-full">
           <SheetsShadcn
-            botao={<CiMenuFries className="h-8 w-8 fill-dourado " />}
+            botao={<CiMenuFries className="h-8 w-8 fill-black " />}
             corpo={corpoMenu()}
           />
         </div>
         <div className="lg:flex hidden items-center justify-end gap-5 w-[50%]">
           <Link
             href={"/TabelaEquipes"}
-            className="flex items-end  text-dourado uppercase "
+            className="flex items-end text-black font-bold uppercase "
           >
             <span className="font-roboto">EQUIPES</span>
           </Link>
           <Link
-            href={"/TabelaEquipes"}
-            className="flex items-center    text-dourado uppercase "
+            href={"/TabelaJogadores"}
+            className="flex items-center text-black font-bold uppercase "
           >
-            <span className="font-roboto">MVP</span>
+            <span className="font-roboto ">Jogadores</span>
           </Link>
-          <Link href={"/TabelaEquipes"} className="flex items-center   ml-10">
-            <IoHomeSharp className="fill-dourado w-8 h-8" />
+          <Link href={"/"} className="flex items-center   ml-10">
+            <IoHomeSharp className="fill-black w-8 h-8" />
           </Link>
           <Link
             href={"/"}
-            className="flex items-center   gap-2  text-cinzaAzulado uppercase "
+            className="flex items-center  gap-2 text-black uppercase "
           >
             <IoMdSettings className="w-8 h-8" />
           </Link>

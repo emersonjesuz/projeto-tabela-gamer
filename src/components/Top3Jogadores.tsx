@@ -8,7 +8,7 @@ interface Props {
 
 export default function Top3Jogadores({ equipes, link, titulo }: Props) {
   return (
-    <div className="flex flex-col items-center p-5 gap-5  bg-[#3f3f3f] shadow-md shadow-black/50 rounded-lg lg:rounded-2xl">
+    <div className="flex flex-col items-center p-5 gap-5  bg-black shadow-md shadow-black/50 rounded-lg lg:rounded-2xl">
       <div className="flex  justify-center w-full h-10 my-5">
         <h1 className="font-bold  font-roboto text-center text-white text-[20px] w-full">
           {titulo}
